@@ -83,7 +83,7 @@ const BlogIndexPage = () => {
       <div>
         <h1>Welcome back, {userName}</h1>
         <div>
-          <button onClick={() => router.push(`/blogs/${userId}/create`)}>
+          <button className="create-btn" onClick={() => router.push(`/blogs/${userId}/create`)}>
             Create Blog
           </button>
         </div>

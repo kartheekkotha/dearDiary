@@ -105,3 +105,29 @@ a {
     color-scheme: dark;
   }
 }
+
+.create-btn{
+  border-radius: 0.25rem;
+  border-width: 0rem;
+  padding-right: 0.75rem;
+  padding-left:0.75rem;
+  padding-top:0.35rem;
+  padding-bottom: 0.35rem;
+  background-color: #30363c;
+  color: white;
+}
+
+.create-blog-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh ;
+  justify-content: center;
+  align-items: center;
+  margin-top: -40px;
+}
+
+.create-blog-container>form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

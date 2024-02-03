@@ -44,7 +44,7 @@ const CreateBlogPage = () => {
       <link rel="icon" href="/dearDiary.ico" />
     </Head>
     <Layout>
-      <div>
+      <div className="create-blog-container">
         <h1>Create Blog Entry</h1>
         <form onSubmit={handleCreateBlog}>
           <div>
@@ -62,7 +62,7 @@ const CreateBlogPage = () => {
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
-          <button type="submit">Create</button>
+          <button type="submit" className="create-btn">Create</button>
         </form>
       </div>
     </Layout>

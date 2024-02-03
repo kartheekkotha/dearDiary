@@ -75,7 +75,7 @@ const DiaryIndexPage = () => {
                 {/* Display user name */}
                 <h1>Hello, Welcome Back {userName}</h1>
                 <div>
-                    <button onClick={() => router.push(`/diary/${userId}/create`)}>Create Diary</button>
+                    <button className="create-btn" onClick={() => router.push(`/diary/${userId}/create`)}>Create Diary</button>
                 </div>
                 {/* Display diary entries */}
                 {diaries.length === 0 ? (

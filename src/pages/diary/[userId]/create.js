@@ -39,7 +39,7 @@ const CreateDiaryPage = () => {
           <link rel="icon" href="/dearDiary.ico" />
         </Head>
         <Layout>
-            <div>
+            <div className="create-blog-container">
                 <h1>Create Diary Entry</h1>
                 <form onSubmit={handleCreateDiary}>
                     <div>
@@ -50,7 +50,7 @@ const CreateDiaryPage = () => {
                         <label>Content:</label>
                         <textarea value={content} onChange={(e) => setContent(e.target.value)} />
                     </div>
-                    <button type="submit">Create</button>
+                    <button className="create-btn" type="submit">Create</button>
                 </form>
             </div>
         </Layout>
