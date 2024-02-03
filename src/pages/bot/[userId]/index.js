@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
 import { getFirestore, collection, query, where, getDocs, getDoc, addDoc,doc } from 'firebase/firestore';
+import Head from "next/head";
 
 const BlogIndexPage = () => {
     const router = useRouter();
@@ -119,6 +120,13 @@ const BlogIndexPage = () => {
     };
 
     return (
+        <>
+        <Head>
+          <title>Dear Diary</title>
+          <meta name="description" content="A version of yourself" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/dearDiary.ico" />
+        </Head>
         <Layout>
             <div>
                 <h1>Blog Index Page</h1>
@@ -148,6 +156,7 @@ const BlogIndexPage = () => {
                 </div>
             </div>
         </Layout>
+        </>
     );
 };
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../../../components/layout";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import Head from "next/head";
 
 // Define the BlogPage component
 const BlogPage = () => {
@@ -79,6 +80,13 @@ const BlogPage = () => {
 
   // Render the component
   return (
+    <>
+    <Head>
+      <title>Dear Diary</title>
+      <meta name="description" content="A version of yourself" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/dearDiary.ico" />
+    </Head>
     <Layout>
       <div>
         <h1>Blog by {userName}</h1>
@@ -113,6 +121,7 @@ const BlogPage = () => {
         )}
       </div>
     </Layout>
+    </>
   );
 };
 

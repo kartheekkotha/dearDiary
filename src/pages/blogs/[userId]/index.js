@@ -12,6 +12,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import Link from "next/link";
+import Head from "next/head";
 
 // Define the BlogIndexPage component
 const BlogIndexPage = () => {
@@ -71,6 +72,13 @@ const BlogIndexPage = () => {
 
   // Render the component
   return (
+    <>
+    <Head>
+      <title>Dear Diary</title>
+      <meta name="description" content="A version of yourself" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/dearDiary.ico" />
+    </Head>
     <Layout>
       <div>
         <h1>Welcome back, {userName}</h1>
@@ -101,6 +109,7 @@ const BlogIndexPage = () => {
         )}
       </div>
     </Layout>
+    </>
   );
 };
 
