@@ -15,7 +15,7 @@ const ChatPage = () => {
         router.push(`/bot/${user1Id}`);
     };
 
-    const client = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+    const client = new OpenAI({ apiKey: '', dangerouslyAllowBrowser: true });
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
     const [diaryEntries, setDiaryEntries] = useState([]);
