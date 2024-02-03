@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
 import { getFirestore, collection, query, orderBy, getDocs, doc, getDoc } from 'firebase/firestore';
 import Link from 'next/link';
+import Head from "next/head";
 
 // Define the DiaryIndexPage component
 const DiaryIndexPage = () => {
@@ -62,6 +63,13 @@ const DiaryIndexPage = () => {
 
     // Render the component
     return (
+        <>
+        <Head>
+          <title>Dear Diary</title>
+          <meta name="description" content="A version of yourself" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/dearDiary.ico" />
+        </Head>
         <Layout>
             <div>
                 {/* Display user name */}
@@ -88,6 +96,7 @@ const DiaryIndexPage = () => {
                 )}
             </div>
         </Layout>
+        </>
     );
 };
 

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { useAuth } from '../../../context/AuthContext';
+import Head from "next/head";
 
 const CreateDiaryPage = () => {
     const router = useRouter();
@@ -30,6 +31,13 @@ const CreateDiaryPage = () => {
     };
 
     return (
+        <>
+        <Head>
+          <title>Dear Diary</title>
+          <meta name="description" content="A version of yourself" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/dearDiary.ico" />
+        </Head>
         <Layout>
             <div>
                 <h1>Create Diary Entry</h1>
@@ -46,6 +54,7 @@ const CreateDiaryPage = () => {
                 </form>
             </div>
         </Layout>
+        </>
     );
 };
 
