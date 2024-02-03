@@ -1,8 +1,12 @@
 // context/AuthContext.js
-import { createContext, useContext, useEffect, useState } from 'react';
-import { signInWithPopup , signOut , onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
-
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const AuthContext = createContext();
 
@@ -13,10 +17,10 @@ const AuthProvider = ({ children }) => {
     // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-    })
+    });
     return () => unsubscribe();
-  } ,[user]);
-  
+  }, [user]);
+
   const logout = () => {
     // Clear the user data on logout
     signOut(auth)
