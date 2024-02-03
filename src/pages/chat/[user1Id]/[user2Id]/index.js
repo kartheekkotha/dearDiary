@@ -15,17 +15,35 @@ const ChatPage = () => {
         router.push(`/bot/${user1Id}`);
     };
 
-    const client = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+    const client = new OpenAI({ apiKey: '', dangerouslyAllowBrowser: true });
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
     const [diaryEntries, setDiaryEntries] = useState([]);
     const [blogs, setBlogs] = useState([]);
+    const [queryHistory, setQueryHistory] = useState('');
 
     useEffect(() => {
         fetchDiaryEntries(user2Id);
         fetchBlogs(user2Id);
     }, [user2Id]);
 
+    useEffect(() => {
+        console.log(diaryEntries); // Log inside this useEffect
+        let concatenatedString = '';
+        let remainingLength = 90000;
+        for (let item of diaryEntries) {
+            let concatItem = `${item.title} ${item.content}`;
+            if (concatItem.length <= remainingLength) {
+                concatenatedString += concatItem;
+                remainingLength -= concatItem.length;
+            } else {
+                concatenatedString += concatItem.substring(0, remainingLength);
+                break;
+            }
+        }
+        concatenatedString += "\n\nAct as someone who has experienced the above and is chatting with his friend:\n";
+        setQueryHistory(concatenatedString);
+    }, [diaryEntries]);
     const fetchDiaryEntries = async (userId) => {
         try {
             const db = getFirestore();
@@ -33,7 +51,6 @@ const ChatPage = () => {
             const snapshot = await getDocs(diaryRef); // Fetch documents from the collection
             const diaryData = snapshot.docs.map(doc => doc.data()); // Extract data from each document
             setDiaryEntries(diaryData); // Update state with diary entries
-            console.log(diaryData);
         } catch (error) {
             console.error('Error fetching diary entries:', error);
         }
@@ -46,7 +63,6 @@ const ChatPage = () => {
             const snapshot = await getDocs(blogsRef); // Fetch documents from the collection
             const blogsData = snapshot.docs.map(doc => doc.data()); // Extract data from each document
             setBlogs(blogsData); // Update state with blogs data
-            console.log(blogsData);
         } catch (error) {
             console.error('Error fetching blogs:', error);
         }
@@ -60,8 +76,9 @@ const ChatPage = () => {
         const userMessage = `You: ${message}`;
         const updatedConversation = [...conversation, userMessage]; // Update conversation with user's message
     
-        const finalQuery = updatedConversation.join('\n'); // Add user's message to the query
-    
+        const finalQuery = queryHistory+updatedConversation.join('\n');
+        console.log(finalQuery);
+        //*
         client.chat.completions.create({
             messages: [
                 { "role": "system", "content": "You are a helpful assistant." },
@@ -80,6 +97,7 @@ const ChatPage = () => {
             console.error('Error:', error);
             setMessage(''); // Clear message input after sending
         });
+        //*/
     };
     
 
