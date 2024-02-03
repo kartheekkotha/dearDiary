@@ -45,7 +45,7 @@ const SignupLogin = () => {
         email: email,
         username: displayName,
       });
-      const subcollections = ["diaries", "blogs", "sharedId"];
+      const subcollections = ["diaries", "blogs", "couples"];
       await Promise.all(
         subcollections.map(async (subcollection) => {
           const subcollectionRef = collection(

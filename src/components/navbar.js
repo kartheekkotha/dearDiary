@@ -91,11 +91,6 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" href={`/bot/${user.uid}`}>
-                      Chat Bot
-                      </Link>
-                    </li>
-                    <li>
                       <button className="dropdown-item" onClick={handleLogout}>
                         Logout
                       </button>
