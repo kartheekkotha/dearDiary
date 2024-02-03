@@ -1,10 +1,11 @@
-// chat/[user2Id].js
-
 import { useRouter } from 'next/router';
 import Layout from '../../../../components/layout';
 import Head from "next/head";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OpenAI from "openai";
+import firebase from 'firebase/app';
+import { getFirestore, doc, getDoc,getDocs, updateDoc, collection } from 'firebase/firestore';
+import 'firebase/firestore';
 
 const ChatPage = () => {
     const router = useRouter();
@@ -17,6 +18,39 @@ const ChatPage = () => {
     const client = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
+    const [diaryEntries, setDiaryEntries] = useState([]);
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        fetchDiaryEntries(user2Id);
+        fetchBlogs(user2Id);
+    }, [user2Id]);
+
+    const fetchDiaryEntries = async (userId) => {
+        try {
+            const db = getFirestore();
+            const diaryRef = collection(db, `users/${userId}/diaries`); // Reference to the diaries collection
+            const snapshot = await getDocs(diaryRef); // Fetch documents from the collection
+            const diaryData = snapshot.docs.map(doc => doc.data()); // Extract data from each document
+            setDiaryEntries(diaryData); // Update state with diary entries
+            console.log(diaryData);
+        } catch (error) {
+            console.error('Error fetching diary entries:', error);
+        }
+    };
+    
+    const fetchBlogs = async (userId) => {
+        try {
+            const db = getFirestore();
+            const blogsRef = collection(db, `users/${userId}/blogs`); // Reference to the blogs collection
+            const snapshot = await getDocs(blogsRef); // Fetch documents from the collection
+            const blogsData = snapshot.docs.map(doc => doc.data()); // Extract data from each document
+            setBlogs(blogsData); // Update state with blogs data
+            console.log(blogsData);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        }
+    };
 
     const handleMessageChange = (event) => {
         setMessage(event.target.value);
@@ -49,6 +83,7 @@ const ChatPage = () => {
     };
     
 
+    
     return (
         <>
         <Head>
