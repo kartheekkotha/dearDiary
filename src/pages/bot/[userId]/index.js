@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
-import { getFirestore, collection, query, where, getDocs, getDoc, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, where, getDocs, getDoc, addDoc,doc } from 'firebase/firestore';
 
 const BlogIndexPage = () => {
     const router = useRouter();
@@ -9,6 +9,7 @@ const BlogIndexPage = () => {
     const [sharedIds, setSharedIds] = useState([]);
     const [hasSelfLink, setHasSelfLink] = useState(false);
     const [sharedWithEmail, setSharedWithEmail] = useState('');
+    const [usernames, setUsernames] = useState({});
 
     useEffect(() => {
         const fetchSharedIds = async () => {
@@ -19,12 +20,19 @@ const BlogIndexPage = () => {
 
                 const querySnapshot = await getDocs(q);
                 const sharedIdsData = [];
-                querySnapshot.forEach((doc) => {
+                querySnapshot.forEach(async (doc) => {
                     const data = { id: doc.id, ...doc.data() };
                     sharedIdsData.push(data);
                     if (data.isSelf) {
                         setHasSelfLink(true);
                     }
+                    // Fetch username for user2Id
+                    const username = await fetchUserName(data.user2Id);
+                    console.log(username);
+                    setUsernames((prevUsernames) => ({
+                        ...prevUsernames,
+                        [data.id]: username,
+                    }));
                 });
                 setSharedIds(sharedIdsData.filter((sharedId) => !sharedId.isSelf));
             } catch (error) {
@@ -37,12 +45,16 @@ const BlogIndexPage = () => {
         }
     }, [userId]);
 
+
     const fetchUserName = async (userId) => {
         try {
             const db = getFirestore();
-            const userDoc = await getDoc(collection(db, 'users').doc(userId));
-            if (userDoc.exists()) {
-                return userDoc.data().displayName;
+            const userDoc = doc(db, 'users', userId);
+            const userdocument = await getDoc(userDoc);
+            if (userdocument.exists()) {
+                const userData = userdocument.data();
+                console.log(userData.displayName)
+                return userData.username;
             } else {
                 return null;
             }
@@ -51,7 +63,6 @@ const BlogIndexPage = () => {
             return null;
         }
     };
-
     const handleCreateSelfLink = async () => {
         try {
             const db = getFirestore();
@@ -103,8 +114,8 @@ const BlogIndexPage = () => {
         return Math.random().toString(36).substr(2, 9);
     };
 
-    const handleNavigateToChat = (user2Id) => () => {
-        router.push(`/chat/${user2Id}`);
+    const handleNavigateToChat = (user1Id , user2Id) => () => {
+        router.push(`/chat/${user1Id}/${user2Id}`);
     };
 
     return (
@@ -115,15 +126,15 @@ const BlogIndexPage = () => {
                     <button onClick={handleCreateSelfLink}>Create Self Link</button>
                 )}
                 {hasSelfLink && (
-                    <button onClick={handleNavigateToChat(userId)}>Open To chat with past you</button>
+                    <button onClick={handleNavigateToChat(userId , userId)}>Open To chat with past you</button>
                 )}
                 <h2>Shared IDs:</h2>
                 <button onClick={handleCreateSharedLink}>Create Shared Link</button>
                 <ul>
                     {sharedIds.map((sharedId) => (
                         <li key={sharedId.id}>
-                            {sharedId.id}
-                            <button onClick={handleNavigateToChat(sharedId.user2Id)}>Chat</button>
+                            {usernames[sharedId.id] || sharedId.user2Id}
+                            <button onClick={handleNavigateToChat(userId ,sharedId.user2Id)}>Chat</button>
                         </li>
                     ))}
                 </ul>
