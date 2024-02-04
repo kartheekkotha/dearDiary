@@ -22,6 +22,7 @@ const BlogPage = () => {
           blogsData.push({ id: doc.id, userId, ...doc.data() });
         });
         setBlogs(blogsData);
+        console.log(blogsData);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -39,21 +40,24 @@ const BlogPage = () => {
         <link rel="icon" href="/dearDiary.ico" />
       </Head>
       <Layout>
-        <div className={styles.container}>
-          <main className={styles.main}>
-            <h1 className={styles.title}>Blog Page</h1>
-            <ul className={styles.list}>
-              {/* Render each blog */}
-              {blogs.map((blog) => (
-                <li key={blog.id} className={styles.item}>
-                  <h2>{blog.title}</h2>
-                  <p>{blog.content}</p>
-                  <p>Written by: {blog.userName}</p> {/* Display username */}
-                </li>
-              ))}
-            </ul>
-          </main>
-        </div>
+        <section className="vh-100" >
+          <div className="container py-5 h-100">
+            <h1 className="text-center mb-2">All Blogs</h1>
+            <div className="row d-flex justify-content-center align-items-center h-100">
+              <div className="col col-lg-10 col-xl-8">
+                {blogs.map((blog) => (
+                  <div key={blog.id} className="card backgroundColor: '#cbd5e0' text-muted rounded-3 mb-3"  style={{ backgroundColor: '#cbd5e0' }}>
+                    <div className="card-body p-4">
+                      <h4>{blog.content}</h4>
+                      <p> </p>
+                      <p className="blockquote-footer mb-0 text-muted">{blog.userName}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </Layout>
     </>
   );

@@ -128,30 +128,33 @@ const BlogIndexPage = () => {
           <link rel="icon" href="/dearDiary.ico" />
         </Head>
         <Layout>
-            <div>
+            <div className='d-flex flex-column justify-content-center align-items-center'>
                 <h1>Blog Index Page</h1>
                 {!hasSelfLink && (
-                    <button onClick={handleCreateSelfLink}>Create Self Link</button>
+                    <button className="create-btn" onClick={handleCreateSelfLink}>Create Self Link</button>
                 )}
                 {hasSelfLink && (
-                    <button onClick={handleNavigateToChat(userId , userId)}>Open To chat with past you</button>
+                    <button className="create-btn" onClick={handleNavigateToChat(userId , userId)}>Open To chat with past you</button>
                 )}
+                <p> </p>
                 <h2>Shared IDs:</h2>
-                <button onClick={handleCreateSharedLink}>Create Shared Link</button>
-                <ul>
+                <button className="create-btn" onClick={handleCreateSharedLink}>Create Shared Link</button>
+                <div className="container mt-3">
+                <ul className='list-group'>
                     {sharedIds.map((sharedId) => (
-                        <li key={sharedId.id}>
-                            {usernames[sharedId.id] || sharedId.user2Id}
-                            <button onClick={handleNavigateToChat(userId ,sharedId.user2Id)}>Chat</button>
-                        </li>
+                    <li className='list-group-item d-flex justify-content-between align-items-center' key={sharedId.id}>
+                        <span>{usernames[sharedId.id] || sharedId.user2Id}</span>
+                        <button className="btn btn-secondary" onClick={() => handleNavigateToChat(userId, sharedId.user2Id)}>Chat</button>
+                    </li>
                     ))}
                 </ul>
+                </div>
                 <div id="addSharedLinkModal" className="modal">
-                    <div className="modal-content">
+                    <div className="modal-content ">
                         <span className="close" onClick={handleCloseModal}>&times;</span>
                         <h2>Add Shared Link</h2>
-                        <input type="email" value={sharedWithEmail} onChange={(e) => setSharedWithEmail(e.target.value)} />
-                        <button onClick={handleAddSharedLink}>Add</button>
+                        <input className="create-btn" type="email" value={sharedWithEmail} onChange={(e) => setSharedWithEmail(e.target.value)} />
+                        <button className="create-btn" onClick={handleAddSharedLink}>Add</button>
                     </div>
                 </div>
             </div>

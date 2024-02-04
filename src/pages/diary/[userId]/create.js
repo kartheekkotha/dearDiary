@@ -39,21 +39,29 @@ const CreateDiaryPage = () => {
           <link rel="icon" href="/dearDiary.ico" />
         </Head>
         <Layout>
-            <div className="create-blog-container">
-                <h1>Create Diary Entry</h1>
-                <form onSubmit={handleCreateDiary}>
-                    <div>
-                        <label>Title:</label>
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                    </div>
-                    <div >
-                        <label>Content:</label>
-                        <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-                    </div>
-                    <button className="create-btn" type="submit">Create</button>
-                </form>
+    <div className="container">
+        <div className="row justify-content-center">
+            <div className="col-md-8">
+                <div className="container">
+                    <h1>Create Diary Entry</h1>
+                    <form onSubmit={handleCreateDiary}>
+                        <div className="form-group">
+                            <label>Title:</label>
+                            <input type="text" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        </div>
+                        <div className="form-group">
+                            <label>Content:</label>
+                            <textarea className="form-control" rows="15" value={content} onChange={(e) => setContent(e.target.value)} />
+                        </div>
+                        <p> </p>
+                        <button className="btn btn-primary create-btn" type="submit">Create</button>
+                    </form>
+                </div>
             </div>
-        </Layout>
+        </div>
+    </div>
+</Layout>
+
         </>
     );
 };

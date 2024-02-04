@@ -21,7 +21,6 @@ const CreateBlogPage = () => {
       const db = getFirestore();
       const blogsRef = collection(db, "users", userId, "blogs");
       await addDoc(blogsRef, {
-        title,
         content,
         createdAt: new Date(),
         createdBy: user.uid, // Assuming you have access to the current user
@@ -44,28 +43,32 @@ const CreateBlogPage = () => {
       <link rel="icon" href="/dearDiary.ico" />
     </Head>
     <Layout>
-      <div className="create-blog-container">
-        <h1>Create Blog Entry</h1>
-        <form onSubmit={handleCreateBlog}>
-          <div>
-            <label>Title:</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Content:</label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="create-btn">Create</button>
-        </form>
+  <div className="container">
+    <div className="row justify-content-center">
+      <div className="col-md-8">
+        <div className="container">
+          <h1 className="text-center">Create Quote</h1>
+          <form onSubmit={handleCreateBlog}>
+            <div className="form-group">
+              <label>Content:</label>
+              <textarea
+                className="form-control"
+                rows="5"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
+            <p> </p>
+            <div className="text-center">
+              <button type="submit" className="btn btn-primary create-btn">Create</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </Layout>
+    </div>
+  </div>
+</Layout>
+
     </>
   );
 };

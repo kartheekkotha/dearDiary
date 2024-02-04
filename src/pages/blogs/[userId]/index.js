@@ -84,19 +84,19 @@ const BlogIndexPage = () => {
         <h1>Welcome back, {userName}</h1>
         <div>
           <button className="create-btn" onClick={() => router.push(`/blogs/${userId}/create`)}>
-            Create Blog
+            Create Quote
           </button>
         </div>
         {/* Display blog entries */}
         {blogs.length === 0 ? (
-          <p>No blog entries found.</p>
+          <p>No Quote entries found.</p>
         ) : (
           <ul>
             {blogs.map((blog) => (
               <li key={blog.id}>
                 <Link href={`/blogs/${userId}/${blog.id}`}>
                   {/* Display title as link */}
-                  <div style={{ cursor: "pointer" }}>{blog.title}</div>
+                  <div style={{ cursor: "pointer" }}>{blog.content}</div>
                 </Link>
                 {/* Display created time */}
                 <p>

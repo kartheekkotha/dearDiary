@@ -49,7 +49,6 @@ const BlogPage = () => {
         if (docSnapshot.exists()) {
           const blogData = docSnapshot.data();
           setBlog({ id: docSnapshot.id, ...blogData });
-          setTitle(blogData.title);
           setContent(blogData.content);
         } else {
           console.log("No such document!");
@@ -95,17 +94,11 @@ const BlogPage = () => {
             {!isEditing && (
               <>
                 <button onClick={() => setIsEditing(true)}>Edit</button>
-                <h2>Title: {blog.title}</h2>
-                <p>Content: {blog.content}</p>
+                <h2>Content: {blog.content}</h2>
               </>
             )}
             {isEditing && (
               <>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}

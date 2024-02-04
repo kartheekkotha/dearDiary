@@ -37,7 +37,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/allblogs">
-                Blogs
+                Quotes
               </Link>
             </li>
             <li className="nav-item">
@@ -82,7 +82,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         href={`/blogs/${user.uid}`}
                       >
-                        Write Blog
+                        Write Quote
                       </Link>
                     </li>
                     <li>

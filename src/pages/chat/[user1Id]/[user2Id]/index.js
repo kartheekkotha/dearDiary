@@ -126,7 +126,7 @@ const ChatPage = () => {
         const chunkSize = 90000; // Set the maximum chunk size
         const chunks = [];
 
-        let finalQuery = `So,you will be my friend who have written the below diary entries and blogs, so answer like one when asked for. like you are the author of them and the blogs or the thoughts you believe in, read this data but don't reply until I ask tell you everytime "Your Question is:" and answer the question when asked as someone who has experienced the above as author of the above text and is chatting with his/her friend"\n\n` + queryHistory + updatedConversation.join('\n');
+        let finalQuery = `So,you will be my friend who have written the below diary entries and blogs, so answer like one when asked for and never mention anything like as a author of the dairy mentioned. like you are the author of them and the blogs or the thoughts you believe in, read this data but don't reply until I ask tell you everytime "Your Question is:" and answer the question when asked as someone who has experienced the above as author of the above text and is chatting with his/her friend"\n\n` + queryHistory + updatedConversation.join('\n');
         chunks.push(finalQuery);
         
         for (let i = 0; i < finalQuery.length; i += chunkSize) {
@@ -180,7 +180,7 @@ const ChatPage = () => {
           <link rel="icon" href="/dearDiary.ico" />
         </Head>
         <Layout>
-            <div>
+            {/* <div>
                 <h1>Chat with {name2}</h1>
                 <p>This is the chat page for {name}.</p>
                 <div className="chat-container">
@@ -190,10 +190,35 @@ const ChatPage = () => {
                 </div>
                 <div>
                     <input type="text" value={message} onChange={handleMessageChange} />
-                    <button onClick={sendMessage}>Send</button>
+                    <button className='btn btn-primary animated-button' onClick={sendMessage}>Send</button>
                 </div>
-                <button onClick={handleGoBack}>Go Back</button>
-            </div>
+                <button className='btn btn-primary animated-button' onClick={handleGoBack}>Go Back</button>
+            </div> */}
+<div className="container" style={{ backgroundColor: '#cbd5e0' }}>
+  <div className="row justify-content-center">
+    <div className="col-md-8">
+      <h1 className="text-muted">Chat with {name2}</h1>
+      <p className="text-muted">This is the chat page for {name}.</p>
+      <div className="chat-container">
+        {conversation.map((msg, index) => (
+          <p key={index} className="text-muted">{msg}</p>
+        ))}
+      </div>
+      <div className="input-group mt-3">
+        <input type="text" className="form-control" value={message} onChange={handleMessageChange} />
+        <div className="input-group-append">
+          <button className='btn btn-primary' onClick={sendMessage}>Send</button>
+        </div>
+      </div>
+      <div className="text-center mt-3">
+        <button className='btn btn-primary' onClick={handleGoBack}>Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
         </Layout>
         </>
     );
