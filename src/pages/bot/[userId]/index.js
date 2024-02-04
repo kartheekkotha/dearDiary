@@ -144,7 +144,7 @@ const BlogIndexPage = () => {
                     {sharedIds.map((sharedId) => (
                     <li className='list-group-item d-flex justify-content-between align-items-center' key={sharedId.id}>
                         <span>{usernames[sharedId.id] || sharedId.user2Id}</span>
-                        <button className="btn btn-secondary" onClick={() => handleNavigateToChat(userId, sharedId.user2Id)}>Chat</button>
+                        <button className="btn btn-secondary" onClick={handleNavigateToChat(userId, sharedId.user2Id)}>Chat</button>
                     </li>
                     ))}
                 </ul>
