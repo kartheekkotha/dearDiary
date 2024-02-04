@@ -61,7 +61,7 @@ const ChatPage = () => {
             let formattedTime = date.toLocaleTimeString('en-US');
 
             // Concatenate title, content, and formatted date and time
-            let concatItem = `The Date this blog is created on : ${formattedDate}, at time Time: ${formattedTime}, and the title is ${item.title} and the content is ${item.content}`;
+            let concatItem = `The Date this quote is created on : ${formattedDate}, at time Time: ${formattedTime}, and the title is ${item.title} and the content is ${item.content}`;
             concatenatedString += concatItem + '\n';
         }
         console.log(concatenatedString);
@@ -131,7 +131,7 @@ const ChatPage = () => {
         const chunkSize = 90000; // Set the maximum chunk size
         const chunks = [];
 
-        let finalQuery = `So,you are ${name2} and you will be my friend who have written the below diary entries and blogs,but when you respond don't mention that you got the answers based on the diaries and the blogs, so answer like one when asked for and never mention anything like as a author of the dairy mentioned. like you are the author of them and the blogs or the thoughts you believe in, read this data but don't reply until I ask tell you everytime "Your Question is:" and answer the question when asked as someone who has experienced the above as author of the above text and is chatting with his/her friend"\n\n` + queryHistory + updatedConversation.join('\n');
+        let finalQuery = `So,you are ${name2} and you will be my friend who have written the below diary entries and quotes,but when you respond don't mention that you got the answers based on the diaries and the blogs, so answer like one when asked for and never mention anything like as a author of the dairy mentioned. like you are the author of them and the blogs or the thoughts you believe in, read this data but don't reply until I ask tell you everytime "Your Question is:" and answer the question when asked as someone who has experienced the above as author of the above text and is chatting with his/her friend"\n\n` + queryHistory + updatedConversation.join('\n');
         chunks.push(finalQuery);
         
         for (let i = 0; i < finalQuery.length; i += chunkSize) {
@@ -141,7 +141,7 @@ const ChatPage = () => {
         try {
             console.log('no of chunks: ', chunks.length)
             let count = 0;
-            for (let chunk of chunks) {
+            for (let chunk of chunks) {4
                 count++;
                 await client.chat.completions.create({
                     messages: [
