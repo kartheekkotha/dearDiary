@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import { getFirestore, doc, getDoc,getDocs, updateDoc, collection } from 'firebase/firestore';
 import 'firebase/firestore';
 
+
 const ChatPage = () => {
     const router = useRouter();
     const { user1Id, user2Id } = router.query;
@@ -17,12 +18,16 @@ const ChatPage = () => {
     };
 
 
-    const client = new OpenAI({ apiKey: '', dangerouslyAllowBrowser: true });
+    const client = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
     const [message, setMessage] = useState('');
     const [conversation, setConversation] = useState([]);
     const [diaryEntries, setDiaryEntries] = useState([]);
     const [blogs, setBlogs] = useState([]);
     const [queryHistory, setQueryHistory] = useState('');
+
+    useEffect(() => {
+        console.log("key",process.env.NEXT_PUBLIC_OPENAI_API_KEY);
+    }, []);
 
     useEffect(() => {
         fetchUserName(user1Id ,user2Id);
