@@ -91,8 +91,8 @@ const BlogIndexPage = () => {
             const sharedLinkId = generateSharedLinkId(); // Generate a unique shared link ID
 
             // Create shared link documents for both users with the same shared link ID
-            const couplesRefUser1 = collection(db, 'users', userId, 'couples');
-            await addDoc(couplesRefUser1, { id: sharedLinkId, user1Id: userId, user2Id, isSelf: false, createdAt: new Date() });
+            // const couplesRefUser1 = collection(db, 'users', userId, 'couples');
+            // await addDoc(couplesRefUser1, { id: sharedLinkId, user1Id: userId, user2Id, isSelf: false, createdAt: new Date() });
 
             const couplesRefUser2 = collection(db, 'users', user2Id, 'couples');
             await addDoc(couplesRefUser2, { id: sharedLinkId, user1Id: user2Id, user2Id: userId, isSelf: false, createdAt: new Date() });
